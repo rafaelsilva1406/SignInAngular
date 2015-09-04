@@ -1,0 +1,24 @@
+﻿<form name="loginForm" role="form" novalidate>
+    <div class="form-group" ng-class="{ 'has-error': loginForm.username.$touched && loginForm.username.$invalid }">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" data-ng-model="user.username" data-ng-minlength="3" data-ng-maxlength="10" data-ng-pattern="/^[a-zA-Z0-9]*$/" required />
+        <div data-ng-messages="loginForm.username.$error" ng-show="loginForm.username.$touched" role="alert" class="bg-danger">
+            <div ng-messages-include="views/partial/messages.html"></div>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-ng-model="user.password" data-ng-minlength="3" data-ng-maxlength="10" data-ng-pattern="/^[a-zA-Z0-9]*$/" required />
+        <div data-ng-messages="loginForm.password.$error" ng-show="loginForm.password.$touched" role="alert" class="bg-danger">
+            <div ng-messages-include="views/partial/messages.html"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="domain">Domain</label>
+        <select class="form-control" disabled="disabled" data-ng-model="domainSelected" data-ng-options="item.name for item in domainList track by item.id"></select>
+    </div>
+    <div class="form-actions">
+        <button type="submit" title="Login" class="btn btn-default btn-lg btn-block" data-ng-disabled="progress.active()" data-ng-click="submit(user)" data-ng-disabled="!loginForm.$valid"><span>Submit</span></button>
+        <div data-ng-show="progress.active()" class="bg-warning"><strong>Sending…</strong></div>
+    </div>
+</form>
