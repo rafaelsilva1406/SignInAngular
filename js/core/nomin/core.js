@@ -1,5 +1,5 @@
 ﻿window.missionpro.app = (function (service,controller) {
-	var app = angular.module('app', ["ui.router", "ngMessages", "LocalStorageModule", "ui.bootstrap", "ajoslin.promise-tracker"]);
+	var app = angular.module('app', ["ui.router", "ngMessages", "LocalStorageModule", "ui.bootstrap", "ajoslin.promise-tracker", 'chieffancypants.loadingBar', 'ngAnimate']);
 
 	function configs() {
 		app.config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -7,10 +7,15 @@
 
 			$stateProvider
 			  .state('login', {
-				  url: '/login',
-				  templateUrl: 'views/page/login.html',
-				  controller: 'LoginController'
-			  });
+			      url: '/login',
+			      templateUrl: 'views/page/login.html',
+			      controller: 'LoginController'
+			  })
+		      .state('logout', {
+		          url: '/logout',
+		          templateUrl: 'views/page/logout.html',
+		          controller: 'LogoutController'
+		      });
 		  }])
 		  .config(['$httpProvider', function ($httpProvider) {
 			$httpProvider.defaults.useXDomain = true;
@@ -19,7 +24,12 @@
 		  .config(['localStorageServiceProvider', function (localStorageServiceProvider) {
 			localStorageServiceProvider
 				.setStorageType('sessionStorage');
-		  }]);
+		  }])
+		  .config(function (cfpLoadingBarProvider) {
+		      cfpLoadingBarProvider.includeSpinner = true;
+		      cfpLoadingBarProvider.latencyThreshold = 5000;
+		      cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</span></div>';
+		});
 	}
 
 	function init() {
