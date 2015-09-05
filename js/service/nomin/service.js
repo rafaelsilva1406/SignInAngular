@@ -7,17 +7,6 @@
 	function init(obj)
 	{
 	    obj.service('loginService', ['$http', '$location', '$q', function ($http, $location, $q) {
-			//this.getUser = function () {
-			//    return $http.get("db/user.json")
-			//		.then(
-			//			function (response) {
-			//			    model.user.init(response.data.data);
-			//			    return model.user;
-			//			},
-			//			function (httpError) {
-			//			    handleError(httpError);
-			//			});
-			//};
 			this.getDomain = function (){
 				return $http.get("db/domain.json")
 					.then(
@@ -43,7 +32,7 @@
 			
 			    return $http({
 			        method: 'POST',
-			        url:'http://192.168.1.48:10080/appstack/public/v1/rest-login',
+			        url:'',
 			        data: json
 			    }).then(
 					function (response) {
